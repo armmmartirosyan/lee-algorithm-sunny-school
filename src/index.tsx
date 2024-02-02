@@ -1,12 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./app/App";
 
-const Some = () => {
-    return(
-        <div>Something</div>
-    )
-}
+const rootElement = document.getElementById("root")!;
+const root =  ReactDOM.createRoot(rootElement);
 
-const root =  ReactDOM.createRoot(document.getElementById("root")!);
-
-root.render(<Some/>);
+root.render(<App/>);

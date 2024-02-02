@@ -1,0 +1,37 @@
+@import "reset";
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  width: fit-content;
+  height: fit-content;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+}
+
+.item {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: white;
+  border: .1rem solid black;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: rgba(128, 128, 128, 0.31);
+}

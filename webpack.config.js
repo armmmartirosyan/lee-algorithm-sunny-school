@@ -5,13 +5,21 @@ const RULES = [
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-    }
+    },
+    {
+        test: /\.s[ac]ss$/i,
+        use: [
+            "style-loader",
+            "css-loader",
+            "sass-loader",
+        ],
+    },
 ];
 
 const PLUGINS = [
     new HtmlWebpackPlugin({
         template: "./src/index.html",
-        favicon: "./src/favicons/favicon-32x32.png"
+        favicon: "./src/assets/favicons/favicon-32x32.png"
     })
 ];
 
