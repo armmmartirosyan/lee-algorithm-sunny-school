@@ -10,6 +10,7 @@ import type {TGetMatrixReturn, TMatrix} from "../types/global-types";
 export function useGetMatrix(): TGetMatrixReturn {
     const [rows, setRows] = useState(DEFAULT_ROWS_COUNT);
     const [columns, setColumns] = useState(DEFAULT_COLUMNS_COUNT);
+    const [matrix, setMatrix] = useState<TMatrix>();
 
     useEffect(() => {
         if (!rows) {
@@ -33,23 +34,30 @@ export function useGetMatrix(): TGetMatrixReturn {
         }
     }, []);
 
-    return useMemo((): TGetMatrixReturn => {
+    useMemo(() => {
         if (!rows || !columns) {
             setRows(DEFAULT_ROWS_COUNT);
             setColumns(DEFAULT_COLUMNS_COUNT);
-            return undefined;
+            setMatrix(undefined);
+
+            return;
         }
 
-        let matrix: TMatrix = [];
+        let localMatrix: TMatrix = [];
 
         for (let i = 0; i < rows; i++) {
-            matrix[i] = [];
+            localMatrix[i] = [];
 
             for (let j = 0; j < columns; j++) {
-                matrix[i][j] = 0;
+                localMatrix[i][j] = 0;
             }
         }
 
-        return matrix;
+        setMatrix(localMatrix);
     }, [rows, columns]);
+
+    return {
+        matrix,
+        onChangeMatrix: setMatrix
+    }
 }

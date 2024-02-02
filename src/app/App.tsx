@@ -5,7 +5,7 @@ import {Row} from "./components/Row";
 import {Item} from "./components/Item";
 
 export default function App(): JSX.Element {
-    const matrix = useGetMatrix();
+    const {matrix} = useGetMatrix();
 
     if(!matrix) return (<Fragment/>);
 
