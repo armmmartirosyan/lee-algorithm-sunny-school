@@ -30,8 +30,19 @@
   background-color: white;
   border: .1rem solid black;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.item:hover {
+.item.start {
+  background-color: red;
+}
+
+.item.end {
+  background-color: green;
+}
+
+.item:not(.start):not(.end):hover {
   background-color: rgba(128, 128, 128, 0.31);
 }

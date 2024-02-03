@@ -1,11 +1,14 @@
 import {useEffect, useMemo, useState} from 'react';
 import {
     DEFAULT_COLUMNS_COUNT,
+    DEFAULT_ITEM,
     DEFAULT_ROWS_COUNT,
     MAXIMUM_COLUMNS_COUNT,
-    MAXIMUM_ROWS_COUNT, MINIMUM_COLUMNS_COUNT, MINIMUM_ROWS_COUNT
+    MAXIMUM_ROWS_COUNT,
+    MINIMUM_COLUMNS_COUNT,
+    MINIMUM_ROWS_COUNT
 } from "../constants/global-constants";
-import type {TGetMatrixReturn, TMatrix} from "../types/global-types";
+import {TGetMatrixReturn, TMatrix, TMatrixSetterFunction} from "../types/global-types";
 
 export function useGetMatrix(): TGetMatrixReturn {
     const [rows, setRows] = useState(DEFAULT_ROWS_COUNT);
@@ -49,7 +52,7 @@ export function useGetMatrix(): TGetMatrixReturn {
             localMatrix[i] = [];
 
             for (let j = 0; j < columns; j++) {
-                localMatrix[i][j] = 0;
+                localMatrix[i][j] = DEFAULT_ITEM;
             }
         }
 
@@ -58,6 +61,6 @@ export function useGetMatrix(): TGetMatrixReturn {
 
     return {
         matrix,
-        onChangeMatrix: setMatrix
+        onChangeMatrix: setMatrix as TMatrixSetterFunction
     }
 }
