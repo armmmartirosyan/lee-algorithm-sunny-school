@@ -4,7 +4,6 @@ import {Row} from "./components/Row";
 import {Item} from "./components/Item";
 import {useMatrixClick} from "./hooks/useMatrixClick";
 import {useShiftPress} from "./hooks/useShiftPress";
-import {PathFinder} from "./constants/path-finder";
 import "../assets/styles/style.scss";
 
 export default function App(): JSX.Element {
@@ -24,14 +23,6 @@ export default function App(): JSX.Element {
         onPress:  () => {
             if (!end || !start || !matrix) return;
 
-            const pathFinder = new PathFinder({
-                end: end!,
-                start: start!,
-                matrix: matrix!,
-                onChangeMatrix
-            });
-
-            pathFinder.find();
         }
     });
 

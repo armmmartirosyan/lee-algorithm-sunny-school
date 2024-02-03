@@ -1,6 +1,6 @@
 import React, {JSX, useMemo} from 'react';
 import {TItemProps} from "../types/global-types";
-import {END_ITEM, STAR_ITEM, WAY_START_ITEM} from "../constants/global-constants";
+import {DEFAULT_ITEM, END_ITEM, STAR_ITEM} from "../constants/global-constants";
 
 export function Item({
                          position,
@@ -24,7 +24,7 @@ export function Item({
             className={`item ${className}`}
             onClick={() => onClick(position)}
         >
-            {number >= WAY_START_ITEM && number}
+            {number > DEFAULT_ITEM && number}
         </div>
     );
 }
