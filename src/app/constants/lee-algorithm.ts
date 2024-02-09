@@ -1,22 +1,20 @@
-import {TMatrix, TPosition} from "../types/global-types";
-import {DEFAULT_ITEM, START_ITEM} from "./global-constants";
+import {TArrayPoints, TMatrix, TPosition} from "../types/global-types";
+import {DEFAULT_ITEM, START_ITEM, WAY_ITEM} from "./global-constants";
 
 export class LeeAlgorithm {
+    private  _matrix: TMatrix;
+    private readonly _end: TPosition;
     private readonly _i: number;
     private readonly _j: number;
-    private _matrix: TMatrix;
-    private _start: TPosition;
-    private _end: TPosition;
 
-    constructor(matrix: TMatrix, start: TPosition, end: TPosition) {
+    constructor(matrix: TMatrix, end: TPosition) {
         this._j = matrix[0].length
         this._i = matrix.length
         this._matrix = matrix
-        this._start = start
         this._end = end
     }
 
-    public findWay() {
+    public findWay(): void {
         let currentValue = START_ITEM;
 
         while (!this.isFinished() && !this.isNoWays()) {
@@ -29,7 +27,18 @@ export class LeeAlgorithm {
             currentValue++;
         }
 
-        return this.findTheShortestWay(currentValue);
+        const wayPoints =  this.findTheShortestWay(currentValue);
+        this.fillTheWay(wayPoints);
+    }
+
+    private fillTheWay(wayPoints: TPosition[]): void {
+        const newMatrix = [...this._matrix];
+
+        wayPoints.forEach(([i, j]) => {
+            newMatrix[i][j] = WAY_ITEM;
+        });
+
+        this._matrix = newMatrix;
     }
 
     private isFinished(): boolean {
@@ -55,7 +64,7 @@ export class LeeAlgorithm {
         return true;
     }
 
-    private findBoxes(value: number): any[] {
+    private findBoxes(value: number): TArrayPoints[] {
         const boxes = [];
 
         for (let i = 0; i < this._i; i++) {
@@ -69,7 +78,7 @@ export class LeeAlgorithm {
         return boxes;
     }
 
-    private setNeighbours(i: number, j: number, currentValue: number) {
+    private setNeighbours(i: number, j: number, currentValue: number): void {
         if (j > 0 && this._matrix[i][j - 1] === 0) {
             this._matrix[i][j - 1] = currentValue
         }

@@ -11,3 +11,4 @@ export const START_ITEM = 1;
 export const END_ITEM = -1;
 export const DEFAULT_ITEM = 0;
 export const WAY_ITEM = -111;
+export const WALL_ITEM = -222;

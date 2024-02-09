@@ -46,7 +46,11 @@
     background-color: green;
   }
 
-  &:not(.start):not(.end):hover {
+  &.wall {
+    background-color: black;
+  }
+
+  &:not(.start):not(.end):not(.way):hover {
     background-color: rgba(128, 128, 128, 0.31);
   }
 }

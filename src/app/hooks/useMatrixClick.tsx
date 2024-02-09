@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react';
 import {TMatrix, TMatrixSetterFunction, TPosition} from "../types/global-types";
-import {END_ITEM, START_ITEM} from "../constants/global-constants";
+import {END_ITEM, START_ITEM, WALL_ITEM} from "../constants/global-constants";
 
 export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction) {
     const [start, setStart] = useState<TPosition>();
@@ -28,6 +28,15 @@ export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction) {
 
                 return newMatrix;
             })
+        }
+
+        if (start && end) {
+            onChangeMatrix((prevMatrix: TMatrix) => {
+                const newMatrix = [...prevMatrix];
+                newMatrix[row][column] = WALL_ITEM;
+
+                return newMatrix;
+            });
         }
     }, [onChangeMatrix, start, end]);
 

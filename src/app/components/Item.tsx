@@ -1,6 +1,6 @@
 import React, {JSX, useMemo} from 'react';
 import {TItemProps} from "../types/global-types";
-import {DEFAULT_ITEM, END_ITEM, START_ITEM, WAY_ITEM} from "../constants/global-constants";
+import {END_ITEM, START_ITEM, WALL_ITEM, WAY_ITEM} from "../constants/global-constants";
 
 export function Item({
                          position,
@@ -18,6 +18,10 @@ export function Item({
 
         if (number === WAY_ITEM) {
             return "way"
+        }
+
+        if (number === WALL_ITEM) {
+            return "wall"
         }
 
         return "";

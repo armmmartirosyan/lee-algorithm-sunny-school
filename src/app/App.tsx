@@ -1,4 +1,4 @@
-import React, {Fragment, JSX} from 'react';
+import React, {Fragment, JSX, useCallback} from 'react';
 import {useGetMatrix} from "./hooks/useGetMatrix";
 import {Row} from "./components/Row";
 import {Item} from "./components/Item";
@@ -6,8 +6,6 @@ import {useMatrixClick} from "./hooks/useMatrixClick";
 import {useShiftPress} from "./hooks/useShiftPress";
 import {LeeAlgorithm} from "./constants/lee-algorithm";
 import "../assets/styles/style.scss";
-import {TPosition} from "./types/global-types";
-import {WAY_ITEM} from "./constants/global-constants";
 
 export default function App(): JSX.Element {
     const {
@@ -21,25 +19,19 @@ export default function App(): JSX.Element {
         onMatrixClick
     } = useMatrixClick(onChangeMatrix);
 
+    const onPressSpace = useCallback(() => {
+        if (!end || !matrix) return;
+        const leeAlgorithm = new LeeAlgorithm(
+            matrix,
+            end
+        );
+
+        leeAlgorithm.findWay();
+    }, [matrix, end, onChangeMatrix]);
+
     useShiftPress({
         addEvent: !!start && !!end,
-        onPress:  () => {
-            if (!end || !start || !matrix) return;
-            const leeAlgorithm = new LeeAlgorithm(
-                matrix,
-                start,
-                end
-            );
-
-            const theShortestPath = leeAlgorithm.findWay();
-            const newMatrix = [...matrix];
-
-            theShortestPath.forEach(([i, j]) => {
-                newMatrix[i][j] = WAY_ITEM;
-            });
-
-            onChangeMatrix(newMatrix);
-        }
+        onPress: onPressSpace
     });
 
     if(!matrix) return (<Fragment/>);
