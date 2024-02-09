@@ -1,6 +1,6 @@
 import React, {JSX, useMemo} from 'react';
 import {TItemProps} from "../types/global-types";
-import {DEFAULT_ITEM, END_ITEM, STAR_ITEM} from "../constants/global-constants";
+import {DEFAULT_ITEM, END_ITEM, START_ITEM} from "../constants/global-constants";
 
 export function Item({
                          position,
@@ -8,7 +8,7 @@ export function Item({
                          number
 }: TItemProps): JSX.Element {
     const className: string = useMemo(() => {
-        if (number === STAR_ITEM) {
+        if (number === START_ITEM) {
             return "start"
         }
 

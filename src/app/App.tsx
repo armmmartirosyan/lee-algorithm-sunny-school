@@ -4,6 +4,7 @@ import {Row} from "./components/Row";
 import {Item} from "./components/Item";
 import {useMatrixClick} from "./hooks/useMatrixClick";
 import {useShiftPress} from "./hooks/useShiftPress";
+import {LeeAlgorithm} from "./constants/lee-algorithm";
 import "../assets/styles/style.scss";
 
 export default function App(): JSX.Element {
@@ -22,7 +23,15 @@ export default function App(): JSX.Element {
         addEvent: !!start && !!end,
         onPress:  () => {
             if (!end || !start || !matrix) return;
+            const leeAlgorithm = new LeeAlgorithm(
+                matrix,
+                start,
+                end
+            );
 
+            const a = leeAlgorithm.findWay();
+
+            console.log({a});
         }
     });
 
