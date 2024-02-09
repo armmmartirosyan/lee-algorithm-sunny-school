@@ -33,16 +33,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.item.start {
-  background-color: red;
-}
+  &.way {
+    background-color: grey;
+  }
 
-.item.end {
-  background-color: green;
-}
+  &.start {
+    background-color: red;
+  }
 
-.item:not(.start):not(.end):hover {
-  background-color: rgba(128, 128, 128, 0.31);
+  &.end {
+    background-color: green;
+  }
+
+  &:not(.start):not(.end):hover {
+    background-color: rgba(128, 128, 128, 0.31);
+  }
 }

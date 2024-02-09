@@ -23,10 +23,3 @@ export type TShiftPressArgs = {
     addEvent: boolean,
     onPress: () => void
 };
-
-export interface IPathFinder {
-    end: TPosition,
-    start: TPosition,
-    matrix: TMatrix,
-    onChangeMatrix: TMatrixSetterFunction
-}

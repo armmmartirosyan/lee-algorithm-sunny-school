@@ -4,8 +4,10 @@ import {Row} from "./components/Row";
 import {Item} from "./components/Item";
 import {useMatrixClick} from "./hooks/useMatrixClick";
 import {useShiftPress} from "./hooks/useShiftPress";
-import {PathFinder} from "./constants/path-finder";
+import {LeeAlgorithm} from "./constants/lee-algorithm";
 import "../assets/styles/style.scss";
+import {TPosition} from "./types/global-types";
+import {WAY_ITEM} from "./constants/global-constants";
 
 export default function App(): JSX.Element {
     const {
@@ -23,15 +25,20 @@ export default function App(): JSX.Element {
         addEvent: !!start && !!end,
         onPress:  () => {
             if (!end || !start || !matrix) return;
+            const leeAlgorithm = new LeeAlgorithm(
+                matrix,
+                start,
+                end
+            );
 
-            const pathFinder = new PathFinder({
-                end: end!,
-                start: start!,
-                matrix: matrix!,
-                onChangeMatrix
+            const theShortestPath = leeAlgorithm.findWay();
+            const newMatrix = [...matrix];
+
+            theShortestPath.forEach(([i, j]) => {
+                newMatrix[i][j] = WAY_ITEM;
             });
 
-            pathFinder.find();
+            onChangeMatrix(newMatrix);
         }
     });
 
