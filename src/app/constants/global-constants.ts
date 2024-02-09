@@ -10,3 +10,4 @@ export const MAXIMUM_COLUMNS_COUNT = 30;
 export const START_ITEM = 1;
 export const END_ITEM = -1;
 export const DEFAULT_ITEM = 0;
+export const WAY_ITEM = -111;

@@ -6,6 +6,8 @@ import {useMatrixClick} from "./hooks/useMatrixClick";
 import {useShiftPress} from "./hooks/useShiftPress";
 import {LeeAlgorithm} from "./constants/lee-algorithm";
 import "../assets/styles/style.scss";
+import {TPosition} from "./types/global-types";
+import {WAY_ITEM} from "./constants/global-constants";
 
 export default function App(): JSX.Element {
     const {
@@ -29,9 +31,14 @@ export default function App(): JSX.Element {
                 end
             );
 
-            const a = leeAlgorithm.findWay();
+            const theShortestPath = leeAlgorithm.findWay();
+            const newMatrix = [...matrix];
 
-            console.log({a});
+            theShortestPath.forEach(([i, j]) => {
+                newMatrix[i][j] = WAY_ITEM;
+            });
+
+            onChangeMatrix(newMatrix);
         }
     });
 

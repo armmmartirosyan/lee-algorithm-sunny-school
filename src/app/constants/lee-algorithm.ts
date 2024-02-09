@@ -87,21 +87,25 @@ export class LeeAlgorithm {
         }
     }
 
-    private findTheShortestWay(theLastValue: number) {
+    private findTheShortestWay(theLastValue: number): TPosition[] {
+        const [i, j] = this._end;
         const shortestPath: TPosition[] = [];
         let tempValue = theLastValue;
         let temp: TPosition;
 
-        loop1: for (let i = 0; i < this._i; i++) {
-            for (let j = 0; j < this._j; j++) {
-                if (this._matrix[i][j] === theLastValue) {
-                    temp = [i, j];
-                    break loop1;
-                }
-            }
+        if(j > 0 && (this._matrix[i][j - 1] === theLastValue)) {
+            shortestPath.push([i, j - 1]);
+            temp = [i, j - 1];
+        }else if(i > 0 && (this._matrix[i - 1][j] === theLastValue)) {
+            shortestPath.push([i - 1, j]);
+            temp = [i - 1, j];
+        }else if(i + 1 < this._i && (this._matrix[i + 1][j] === theLastValue)) {
+            shortestPath.push([i + 1, j]);
+            temp = [i + 1, j];
+        }else if(j + 1 < this._j && (this._matrix[i][j + 1] === theLastValue)) {
+            shortestPath.push([i, j + 1]);
+            temp = [i, j + 1];
         }
-
-        shortestPath.push(temp!);
 
         while (tempValue > 1){
             const [i, j] = temp!;
@@ -132,6 +136,8 @@ export class LeeAlgorithm {
                 tempValue--;
             }
         }
+
+        shortestPath.push(this._end);
 
         return shortestPath;
     }
