@@ -18,7 +18,7 @@ export type TItemProps = {
 
 export type TGetMatrixReturn = {
     matrix: TMatrix | undefined,
-    onChangeMatrix: TMatrixSetterFunction
+    updateMatrix: TMatrixSetterFunction
 };
 
 export type TShiftPressArgs = {

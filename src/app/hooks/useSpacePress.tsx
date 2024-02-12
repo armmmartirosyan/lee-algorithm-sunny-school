@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from 'react';
 import {TShiftPressArgs} from "../types/global-types";
 
-export function useShiftPress({onPress, addEvent}: TShiftPressArgs) {
+export function useSpacePress({onPress, addEvent}: TShiftPressArgs) {
     const [pressed, setPressed] = useState(false);
 
     const handlePress = useCallback((e: KeyboardEvent) => {

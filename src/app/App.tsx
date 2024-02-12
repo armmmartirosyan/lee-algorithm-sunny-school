@@ -1,25 +1,27 @@
-import React, {Fragment, JSX, useCallback} from 'react';
+import React, {Fragment, JSX, useCallback, useState} from 'react';
 import {useGetMatrix} from "./hooks/useGetMatrix";
 import {Row} from "./components/Row";
 import {Item} from "./components/Item";
 import {useMatrixClick} from "./hooks/useMatrixClick";
-import {useShiftPress} from "./hooks/useShiftPress";
+import {useSpacePress} from "./hooks/useSpacePress";
 import {LeeAlgorithm} from "./constants/lee-algorithm";
 import "../assets/styles/style.scss";
 
 export default function App(): JSX.Element {
+    const [allowClick, setAllowClick] = useState(true);
+
     const {
         matrix,
-        onChangeMatrix
+        updateMatrix
     } = useGetMatrix();
 
     const {
         start,
         end,
         onMatrixClick
-    } = useMatrixClick(onChangeMatrix);
+    } = useMatrixClick(updateMatrix, allowClick);
 
-    const onPressSpace = useCallback(() => {
+    const onSpacePress = useCallback(() => {
         if (!end || !matrix) return;
         const leeAlgorithm = new LeeAlgorithm(
             matrix,
@@ -27,11 +29,16 @@ export default function App(): JSX.Element {
         );
 
         leeAlgorithm.findWay();
-    }, [matrix, end, onChangeMatrix]);
+        setAllowClick(false);
+    }, [matrix, end]);
 
-    useShiftPress({
+    const handleReset = useCallback(() => {
+        setAllowClick(true);
+    }, []);
+
+    useSpacePress({
         addEvent: !!start && !!end,
-        onPress: onPressSpace
+        onPress: onSpacePress
     });
 
     if(!matrix) return (<Fragment/>);

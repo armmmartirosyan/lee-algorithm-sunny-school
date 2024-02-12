@@ -2,7 +2,7 @@ import {useCallback, useState} from 'react';
 import {TMatrix, TMatrixSetterFunction, TPosition} from "../types/global-types";
 import {END_ITEM, START_ITEM, WALL_ITEM} from "../constants/global-constants";
 
-export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction) {
+export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction, allowClick: boolean) {
     const [start, setStart] = useState<TPosition>();
     const [end, setEnd] = useState<TPosition>();
 
@@ -30,7 +30,7 @@ export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction) {
             })
         }
 
-        if (start && end) {
+        if (start && end && allowClick) {
             onChangeMatrix((prevMatrix: TMatrix) => {
                 const newMatrix = [...prevMatrix];
                 newMatrix[row][column] = WALL_ITEM;
@@ -38,7 +38,7 @@ export function useMatrixClick(onChangeMatrix:  TMatrixSetterFunction) {
                 return newMatrix;
             });
         }
-    }, [onChangeMatrix, start, end]);
+    }, [onChangeMatrix, start, end, allowClick]);
 
     return {
         start,

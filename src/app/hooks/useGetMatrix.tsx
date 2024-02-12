@@ -61,6 +61,6 @@ export function useGetMatrix(): TGetMatrixReturn {
 
     return {
         matrix,
-        onChangeMatrix: setMatrix as TMatrixSetterFunction
+        updateMatrix: setMatrix as TMatrixSetterFunction
     }
 }
